@@ -1,0 +1,52 @@
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error, r2_score
+import matplotlib.pyplot as plt
+
+mydata={
+    'height':[148,158,168,178,188],
+    'weight':[58,68,78,88,98]
+}
+df=pd.DataFrame(mydata)
+print(df)
+x=df[['height']]
+y=df['weight']
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.3,random_state=42)
+model=LinearRegression()
+model.fit(x_train,y_train)
+y_pred=model.predict(x_test)
+print("predicted weights:",y_pred)
+print("actual weights:",y_test.values)
+print("mean squared error:",mean_squared_error(y_test,y_pred))
+print("r2 score:",r2_score(y_test,y_pred))
+plt.scatter(x,y,color='red',label='actual')
+plt.plot(x,model.predict(x),color='blue',label='predicted regression line')
+plt.xlabel('height')
+plt.ylabel('weight')
+
+
+bplt.show()
+
+from sentence_transformers import SentenceTransformer
+from sklearn.metrics.pairwise import cosine_similarity
+
+model=SentenceTransformer('all-miniLM-L6-V2')
+text1="i love machine learning"
+text2="i enjoy ai"
+
+emd1=model.encode(text1)
+emd2=model.encode(text2)
+similarity=cosine_similarity([emd1],[emd2])
+print(similarity[0][0])
+from sentence_transformers import SentenceTransformer
+from sklearn.metrics.pairwise import cosine_similarity
+
+model=SentenceTransformer('all-miniLM-L6-V2')
+text1="i love lathika"
+text2="girls enjoy me"
+
+emd1=model.encode(text1)
+emd2=model.encode(text2)
+similarity=cosine_similarity([emd1],[emd2])
+print(similarity[0][0])
